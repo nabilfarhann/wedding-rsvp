@@ -19,13 +19,41 @@ declare global {
   }
 }
 
+const PLAYING = 1;
+
+function start(deck: Player) {
+  deck.unMute();
+  deck.setVolume(40);
+  deck.playVideo();
+}
+
 export function Music() {
   const [on, setOn] = useState(false);
   const player = useRef<Player | null>(null);
-  const want = useRef(false);
+  const want = useRef(true);
 
   useEffect(() => {
     let dead = false;
+    let kick: (() => void) | null = null;
+
+    const dropKick = () => {
+      if (!kick) return;
+      window.removeEventListener("pointerdown", kick);
+      window.removeEventListener("keydown", kick);
+      kick = null;
+    };
+
+    const armGesture = () => {
+      if (kick) return;
+      kick = () => {
+        dropKick();
+        const deck = player.current;
+        if (!deck || !want.current) return;
+        start(deck);
+      };
+      window.addEventListener("pointerdown", kick);
+      window.addEventListener("keydown", kick);
+    };
 
     const boot = () => {
       if (dead || player.current || !window.YT?.Player) return;
@@ -34,7 +62,7 @@ export function Music() {
         width: "200",
         height: "80",
         playerVars: {
-          autoplay: 0,
+          autoplay: 1,
           controls: 0,
           loop: 1,
           playlist: VIDEO,
@@ -44,11 +72,18 @@ export function Music() {
         },
         events: {
           onReady: (event: { target: Player }) => {
-            event.target.setVolume(40);
-            if (want.current) {
-              event.target.unMute();
-              event.target.playVideo();
+            if (!want.current) return;
+            start(event.target);
+          },
+          onStateChange: (event: { data: number }) => {
+            if (event.data === PLAYING) {
+              setOn(true);
+              dropKick();
             }
+          },
+          onAutoplayBlocked: () => {
+            setOn(false);
+            if (want.current) armGesture();
           },
         },
       });
@@ -71,6 +106,7 @@ export function Music() {
 
     return () => {
       dead = true;
+      dropKick();
     };
   }, []);
 
@@ -80,13 +116,8 @@ export function Music() {
     want.current = next;
     const deck = player.current;
     if (!deck) return;
-    if (next) {
-      deck.unMute();
-      deck.setVolume(40);
-      deck.playVideo();
-    } else {
-      deck.pauseVideo();
-    }
+    if (next) start(deck);
+    else deck.pauseVideo();
   };
 
   return (
