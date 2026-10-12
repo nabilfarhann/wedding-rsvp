@@ -14,7 +14,7 @@
   --sans: var(--font-sans), "Avenir Next", system-ui, sans-serif;
   --mx: 50%;
   --my: 28%;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 .card {
@@ -41,8 +41,8 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.01em;
-  background: var(--night);
-  color: var(--champagne);
+  background: #f3ebe3;
+  color: #4e3b30;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -182,10 +182,9 @@ button:focus-visible {
   opacity: 0.14;
 }
 
-.vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 38%, transparent 0%, transparent 46%, rgba(0, 0, 0, 0.42) 100%);
+.vignette,
+.frame {
+  display: none;
 }
 
 .pointer-glow {
@@ -363,15 +362,15 @@ html[data-intro="skip"] .site.ready {
 }
 
 .nav.scrolled {
-  background: #07120f;
-  border-bottom: 1px solid rgba(228, 201, 138, 0.18);
+  background: rgba(243, 235, 227, 0.94);
+  border-bottom: 1px solid rgba(196, 165, 116, 0.35);
 }
 
 .brand {
   font-family: var(--display);
   font-style: italic;
   font-size: 1.55rem;
-  color: var(--champagne);
+  color: #5a4032;
   text-decoration: none;
   letter-spacing: 0.03em;
   line-height: 1;
@@ -391,7 +390,7 @@ html[data-intro="skip"] .site.ready {
 }
 
 .nav-links a {
-  color: rgba(246, 239, 228, 0.82);
+  color: rgba(90, 64, 50, 0.78);
   text-decoration: none;
   font-size: 0.7rem;
   font-weight: 500;
@@ -1272,7 +1271,11 @@ input:-webkit-autofill {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(246, 239, 228, 0.6);
+  color: rgba(90, 64, 50, 0.55);
+}
+
+.foot-names {
+  color: #5a4032;
 }
 
 /* reveal */
@@ -1476,4 +1479,374 @@ input:-webkit-autofill {
   .fold {
     transition: none;
   }
+
+  .scene-zoom,
+  .bird,
+  .butterfly,
+  .fall,
+  .flutter,
+  .leaf,
+  .cascade,
+  .pool i,
+  .fall-svg,
+  .wave,
+  .scene-of,
+  .scene .name,
+  .scene .amp-wrap,
+  .scene .when,
+  .scene .where,
+  .scene .hero-actions,
+  .music {
+    animation: none;
+  }
+
+  .scene-of,
+  .scene .when,
+  .scene .where,
+  .scene .hero-actions {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* motion scene — pale palace, like a watercolor invitation */
+
+.scene {
+  align-items: flex-start;
+  background: #f3ebe3;
+  padding-top: calc(7.5rem + env(safe-area-inset-top));
+}
+
+.scene-zoom {
+  position: absolute;
+  inset: -12%;
+  transform-origin: 50% 82%;
+  animation: deepen 28s cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
+}
+
+.palace {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes deepen {
+  0% { transform: scale(1); }
+  28% { transform: scale(1.06); }
+  62% { transform: scale(1.16); }
+  100% { transform: scale(1.28); }
+}
+
+.palace-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+  display: block;
+}
+
+.fall-svg {
+  animation: pour 1.2s linear infinite;
+}
+
+.fall-svg.b { animation-delay: -0.5s; }
+
+.wave {
+  animation: sway 3.6s ease-in-out infinite;
+  transform-box: fill-box;
+}
+
+.wave.w2 { animation-delay: -1.4s; }
+
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(18px); }
+}
+
+.scene-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at 50% 30%, rgba(255, 250, 244, 0.42), transparent 42%);
+  pointer-events: none;
+}
+
+.scene-copy {
+  text-shadow: 0 10px 28px rgba(247, 241, 230, 0.65);
+}
+
+.scene-of {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
+  color: #6a5346;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: rise 1.3s 1.4s ease both;
+}
+
+.scene .name {
+  font-family: var(--script);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(3.6rem, 15vw, 6.4rem);
+  line-height: 0.86;
+  letter-spacing: 0;
+  color: #5a4032;
+  text-shadow: 0 2px 16px rgba(255, 248, 240, 0.9);
+}
+
+.scene .name.a { animation: rise 1.5s 2.3s ease both; }
+.scene .name.b {
+  margin-top: -0.15rem;
+  animation: rise 1.5s 3.1s ease both;
+}
+
+.scene .amp-wrap {
+  width: auto;
+  height: auto;
+  margin: 0.15rem 0 0;
+  animation: rise 1.2s 2.7s ease both;
+}
+
+.scene .amp {
+  font-size: clamp(2.4rem, 8vw, 3.4rem);
+  color: #8d6a45;
+}
+
+.scene .when,
+.scene .where,
+.scene .hero-actions {
+  opacity: 0;
+  animation: rise 1.2s ease both;
+}
+
+.scene .when { animation-delay: 3.6s; }
+.scene .where { animation-delay: 3.9s; color: #8d6a45; }
+.scene .hero-actions { animation-delay: 4.2s; }
+
+.scene .when em {
+  color: #5a4032;
+}
+
+.scene .btn {
+  background: rgba(255, 250, 244, 0.78);
+  color: #5a4032;
+  border-color: rgba(196, 165, 116, 0.75);
+  box-shadow: 0 10px 24px rgba(90, 64, 50, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.scene .btn.ghost {
+  background: transparent;
+  color: #5a4032;
+}
+
+.scene .hint span {
+  background: linear-gradient(180deg, rgba(141, 106, 69, 0.85), transparent);
+}
+
+.bird {
+  transform-box: fill-box;
+  animation: fly 16s linear infinite;
+}
+
+.bird.b2 { animation-duration: 19s; animation-delay: -6s; }
+.bird.b3 { animation-duration: 22s; animation-delay: -11s; }
+
+@keyframes fly {
+  0% { transform: translateX(-30px); }
+  100% { transform: translateX(80px); }
+}
+
+.butterfly {
+  transform-box: fill-box;
+  animation: flutter 7s ease-in-out infinite;
+}
+
+.butterfly.two { animation-delay: -3s; }
+
+@keyframes flutter {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -14px); }
+}
+
+.fall {
+  animation: pour 2.8s linear infinite;
+}
+
+.fall.b { animation-delay: -1.2s; }
+
+@keyframes pour {
+  0% { transform: translateY(-8px); opacity: 0.45; }
+  100% { transform: translateY(10px); opacity: 0.95; }
+}
+
+.music {
+  position: fixed;
+  z-index: 40;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.9rem 0.55rem 0.7rem;
+  border: 1px solid rgba(196, 165, 116, 0.7);
+  border-radius: 999px;
+  background: rgba(255, 250, 244, 0.9);
+  color: #5a4032;
+  box-shadow: 0 12px 30px rgba(90, 64, 50, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.music-ico {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f3e2c4;
+  font-size: 1rem;
+}
+
+.music.on .music-ico {
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+
+.music-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+
+.music-copy strong {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+.music-copy em {
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8d6a45;
+}
+
+.yt-slot {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.garden {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cascade {
+  position: absolute;
+  top: 79%;
+  width: 2.6%;
+  height: 14%;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.95) 40%,
+    rgba(255, 255, 255, 0.2)
+  );
+  mix-blend-mode: screen;
+  animation: pour 1.15s linear infinite;
+  filter: blur(0.5px);
+}
+
+.cascade.a { left: 36%; }
+.cascade.b { left: 47%; height: 16%; animation-delay: -0.55s; }
+
+.pool {
+  position: absolute;
+  left: 22%;
+  top: 90%;
+  width: 56%;
+  height: 8%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  mix-blend-mode: soft-light;
+}
+
+.pool i {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 16px,
+    rgba(255, 255, 255, 0.75) 16px 18px
+  );
+  animation: ripple 2.4s linear infinite;
+}
+
+@keyframes ripple {
+  to { transform: translateX(-48px); }
+}
+
+.leaf {
+  position: absolute;
+  top: -8%;
+  width: 16px;
+  height: 9px;
+  border-radius: 80% 12% 80% 12%;
+  opacity: 0.9;
+  animation-name: drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drift {
+  0% { transform: translate3d(0, -10vh, 0) rotate(var(--tilt)); opacity: 0; }
+  12% { opacity: 0.85; }
+  50% { transform: translate3d(28px, 48vh, 0) rotate(calc(var(--tilt) + 80deg)); }
+  100% { transform: translate3d(-18px, 110vh, 0) rotate(calc(var(--tilt) + 200deg)); opacity: 0; }
+}
+
+.flutter {
+  position: absolute;
+  width: 54px;
+  height: 36px;
+  animation: glide 14s ease-in-out infinite;
+}
+
+.flutter.f1 { left: 6%; top: 22%; animation-duration: 13s; }
+.flutter.f2 { left: 68%; top: 18%; width: 40px; height: 28px; animation-duration: 17s; animation-delay: -5s; }
+.flutter.f3 { left: 18%; top: 78%; width: 34px; height: 24px; animation-duration: 12s; animation-delay: -3s; }
+.flutter.f4 { left: 74%; top: 72%; width: 48px; height: 32px; animation-duration: 16s; animation-delay: -9s; }
+
+@keyframes glide {
+  0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+  25% { transform: translate(70px, -48px) rotate(8deg); }
+  50% { transform: translate(20px, -90px) rotate(-4deg); }
+  75% { transform: translate(-50px, -30px) rotate(10deg); }
+}
+
+.bfly .wing {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: flap 0.42s ease-in-out infinite;
+}
+
+.bfly .wing.right { animation-direction: reverse; }
+
+@keyframes flap {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.28); }
 }
